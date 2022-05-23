@@ -1,3 +1,9 @@
+# Ignore the file that sets our env variables for local testing
+env_vars.py
+
+/data
+.DS_store
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
