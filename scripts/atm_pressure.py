@@ -15,7 +15,7 @@ import warnings
 # Utility functions    #
 ########################
 
-from env_vars import set_env_vars
+from scripts.env_vars import set_env_vars
 set_env_vars()
 
 
@@ -302,14 +302,14 @@ def match_measurements_to_survey(measurements, surveys):
         if selected_survey.empty:
             warnings.warn("There are no survey data for: " + selected_site)
         
-        survey_dates = [x for x in selected_survey["date_surveyed"].unique()]
+        survey_dates = list(selected_survey["date_surveyed"].unique())
         number_of_surveys = len(survey_dates)
         
         if measurements["date"].min() < min(survey_dates):
             warnings.warn("Warning: There are data that precede the survey dates for: " + selected_site)
             
         if number_of_surveys == 1:
-            selected_measurements["date_surveyed"] = pd.to_datetime(np.where(selected_measurements["date"] >= survey_dates, survey_dates, np.nan))
+            selected_measurements["date_surveyed"] = pd.to_datetime(np.where(selected_measurements["date"] >= survey_dates[0], survey_dates[0], np.nan))
             
         if number_of_surveys > 1:
             survey_dates.append(pd.to_datetime(datetime.datetime.utcnow(), utc=True))

@@ -1,4 +1,4 @@
-from atm_pressure import *
+from scripts.atm_pressure import *
 import pandas as pd
 import numpy as np
 from sqlalchemy import create_engine
@@ -55,8 +55,11 @@ def main():
     formatted_data = format_interpolated_data(interpolated_data)
     
     # Upsert the new data to the database table
-    formatted_data.to_sql("sensor_water_depth", engine, if_exists = "append", method=postgres_upsert)
-    print("Processed data to produce water depth!")
+    try:
+        formatted_data.to_sql("sensor_water_depth", engine, if_exists = "append", method=postgres_upsert)
+        print("Processed data to produce water depth!")
+    except:
+        warnings.warn("Error adding processed data to `sensor_water_depth`")
     
     updated_raw_data = new_data.merge(formatted_data.reset_index().loc[:,["place","sensor_ID","date","sensor_water_depth"]], on=["place","sensor_ID","date"], how = "left")
     updated_raw_data = updated_raw_data[updated_raw_data["sensor_water_depth"].notna()].drop(columns="sensor_water_depth")
@@ -65,8 +68,11 @@ def main():
     updated_raw_data.set_index(['place', 'sensor_ID', 'date'], inplace=True)
     
     # Update raw data to indicate it has been processed
-    updated_raw_data.to_sql("sensor_data", engine, if_exists = "append", method=postgres_upsert)
-    print("Updated raw data to indicate that it was processed!")
+    try:
+        updated_raw_data.to_sql("sensor_data", engine, if_exists = "append", method=postgres_upsert)
+        print("Updated raw data to indicate that it was processed!")
+    except:
+        warnings.warn("Error updating raw data with `processed` tag")
     
     engine.dispose()
 
