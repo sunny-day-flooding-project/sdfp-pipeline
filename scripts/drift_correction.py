@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import datetime
-from scripts.atm_pressure import *
+from atm_pressure import *
 from sqlalchemy import create_engine
 import warnings
 import os

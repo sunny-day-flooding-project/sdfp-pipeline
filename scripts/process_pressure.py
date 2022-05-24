@@ -1,9 +1,12 @@
-from scripts.atm_pressure import *
+from atm_pressure import *
 import pandas as pd
 import numpy as np
 from sqlalchemy import create_engine
 
 def main():
+    
+    from env_vars import set_env_vars
+    set_env_vars()
     
     ########################
     # Establish DB engine  #

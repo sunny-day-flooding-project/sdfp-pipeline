@@ -15,7 +15,7 @@ import warnings
 # Utility functions    #
 ########################
 
-from scripts.env_vars import set_env_vars
+from env_vars import set_env_vars
 set_env_vars()
 
 
