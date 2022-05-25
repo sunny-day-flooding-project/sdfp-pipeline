@@ -7,6 +7,7 @@ def main():
     
     from env_vars import set_env_vars
     set_env_vars()
+    print("set env vars!")
     
     ########################
     # Establish DB engine  #
@@ -17,6 +18,8 @@ def main():
 
     engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
+    print(engine)
+    
     #####################
     # Collect new data  #
     #####################

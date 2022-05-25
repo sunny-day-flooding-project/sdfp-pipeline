@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 5432
 
-CMD ["python", "scripts/process_pressure.py"]
+CMD ["python", "process_pressure.py"]
