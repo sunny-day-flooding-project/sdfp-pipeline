@@ -5,9 +5,9 @@ from sqlalchemy import create_engine
 
 def main():
     
-    from env_vars import set_env_vars
-    set_env_vars()
-    print("set env vars!")
+    # from env_vars import set_env_vars
+    # set_env_vars()
+    # print("set env vars!")
     
     ########################
     # Establish DB engine  #
