@@ -15,8 +15,8 @@ import warnings
 # Utility functions    #
 ########################
 
-from env_vars import set_env_vars
-set_env_vars()
+# from env_vars import set_env_vars
+# set_env_vars()
 
 
 def slicer(my_str,sub):
